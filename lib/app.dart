@@ -8,6 +8,7 @@ import 'package:quizmaster/presentation/pages/master_dashboard.dart';
 import 'package:quizmaster/presentation/pages/profile.dart';
 import 'package:quizmaster/presentation/pages/statistics.dart';
 import 'package:quizmaster/presentation/pages/users.dart';
+import 'package:quizmaster/shared/widgets/app_nav_bar.dart';
 
 enum UserRole { guest, player, master, admin }
 
@@ -185,8 +186,10 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.child,
-      bottomNavigationBar: BottomNavigationBar(
+      body: SafeArea(
+        child: widget.child,
+      ),
+      bottomNavigationBar: CustomNavBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: _getBottomNavigationItems(currentUserRole),
