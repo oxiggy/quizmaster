@@ -13,7 +13,7 @@ import 'package:quizmaster/shared/widgets/app_nav_bar.dart';
 enum UserRole { guest, player, master, admin }
 
 // Пример текущей роли пользователя (для теста можно менять значение)
-UserRole currentUserRole = UserRole.master;
+UserRole currentUserRole = UserRole.guest;
 
 class AppRouter {
   static final GoRouter router = GoRouter(
