@@ -6,18 +6,20 @@ import 'package:quizmaster/core/models/theme.dart';
 import 'package:quizmaster/shared/theme/app_theme.dart';
 import 'package:quizmaster/core/api/api.dart';
 import 'app.dart';
+import 'core/models/session.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: 'assets/.env');
   await Supabase.initialize(url: apiUrl, anonKey: apiKey);
 
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => ThemeModel(),
-      child: const QuizMasterApp(),
-    )
-  );
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => ThemeModel()),
+      ChangeNotifierProvider(create: (_) => AuthProvider()),
+    ],
+    child: const QuizMasterApp(),
+  ));
 }
 
 class QuizMasterApp extends StatelessWidget {
