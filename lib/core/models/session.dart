@@ -45,6 +45,27 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> signup(String email, String password) async {
+    try {
+      final response = await Supabase.instance.client.auth.signUp(
+        email: email,
+        password: password,
+      );
+
+      if (response.session != null) {
+        _accessToken = response.session?.accessToken;
+        _refreshToken = response.session?.refreshToken;
+        await _saveSession();
+        notifyListeners();
+      } else {
+        throw Exception('Ошибка регистрации');
+      }
+    } catch (e) {
+      print('Ошибка входа: $e');
+      throw Exception('Ошибка входа: ${e.toString()}');
+    }
+  }
+
   Future<void> logout() async {
     await Supabase.instance.client.auth.signOut();
     _accessToken = null;

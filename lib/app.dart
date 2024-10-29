@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quizmaster/presentation/pages/active_games.dart';
 import 'package:quizmaster/presentation/pages/auth.dart';
+import 'package:quizmaster/presentation/pages/auth_onboarding.dart';
 import 'package:quizmaster/presentation/pages/game.dart';
 import 'package:quizmaster/presentation/pages/game_list.dart';
 import 'package:quizmaster/presentation/pages/master_dashboard.dart';
@@ -23,6 +24,11 @@ class AppRouter {
         path: '/auth',
         name: 'AuthPage',
         builder: (context, state) => AuthPage(),
+      ),
+      GoRoute(
+        path: '/onboarding',
+        name: 'AuthOnboarding',
+        builder: (context, state) => AuthOnboardingPage(),
       ),
       ShellRoute(
         builder: (context, state, child) {
