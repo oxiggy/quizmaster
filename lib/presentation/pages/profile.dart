@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizmaster/core/utils/debug_utils.dart';
+import '../dialogs/delete_account.dart';
 import '../profile/achievements.dart';
 import '../profile/friends.dart';
 import '../profile/history.dart';
@@ -7,6 +8,7 @@ import '../profile/level.dart';
 import '../profile/statistics.dart';
 //import '../profile/title.dart';
 import '../profile/user_info.dart';
+import '../sheets/pick_avatar.dart';
 import '../widgets/logout_button.dart';
 import '../widgets/theme_selector.dart';
 
@@ -136,6 +138,8 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                     child: Column(
                       children: [
                         const SizedBox(height: 20),
+                        const _avatarForm(),
+                        const SizedBox(height: 20),
                         /*Text('user form'),*/
                         /*Text('email and password form'),*/
                         const SizedBox(
@@ -145,7 +149,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                         /*Text('request to change roleW'),*/
                         const SizedBox(height: 8),
                         TextButton(onPressed: () { printAllSharedPreferences(); }, child: Text('Print logs')),
-                        /*TextButton(onPressed: () {}, child: Text('Delete account')),*/
+                        TextButton(onPressed: () {showDeleteAccountDialog(context);}, child: const Text('Delete account')),
                       ],
                     ),
                   )
@@ -182,6 +186,32 @@ class SettingsScreen extends StatelessWidget {
       child: Hero(
         tag: 'settings-button',
         child: Icon(Icons.settings, size: 100, color: Colors.blue),
+      ),
+    );
+  }
+}
+
+class _avatarForm extends StatelessWidget {
+  const _avatarForm({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      customBorder: const CircleBorder(),
+      onTap: () {
+        showPickAvatarSheet(context);
+      },
+      child: Padding(
+          padding: const EdgeInsets.all(8),
+          child:  Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.blue,
+            ),
+            child: const Icon(Icons.person, size: 50, color: Colors.white),
+          ),
       ),
     );
   }
